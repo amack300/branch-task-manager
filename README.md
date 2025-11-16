@@ -32,7 +32,7 @@ bun dev
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the application in action.
 
-For testing the applicaiton, run either of the below commands.
+For testing the application, run either of the below commands:
 
 ```bash
 npm run test
