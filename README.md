@@ -38,7 +38,4 @@ In order to demonstrate Anthony Mack's ability to create a simple To-Do applicat
 
 Jerad mentioned that Branch is currently using Shadcn UI/Tailwind for the UI, so I used that as a base.  All custom templates are stored in `./components/app/*` along with their associated unit tests.  
 
-In order to persist the `To-Do` data, I chose to use Zustand to store the state management in localStorage.  
-
-
-https://github.com/amack300/branch-task-manager/blob/master/screenshot.png
+In order to persist the `To-Do` data, I chose to use Zustand to store the state management in localStorage.
