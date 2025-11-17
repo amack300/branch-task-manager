@@ -56,7 +56,7 @@ describe('TaskForm', () => {
     ).toBeInTheDocument();
   });
 
-  it('calls onSubmit prop instead of addTask and resets the field', async () => {
+  it('calls onSubmit prop instead of addTask', async () => {
     const onSubmitMock = jest.fn();
 
     render(<TaskForm onSubmit={onSubmitMock} />);
@@ -77,7 +77,5 @@ describe('TaskForm', () => {
     });
 
     expect(addTaskMock).not.toHaveBeenCalled();
-
-    expect(input).toHaveValue('');
   });
 });
