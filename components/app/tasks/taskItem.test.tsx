@@ -1,4 +1,4 @@
-import { render, screen, fireEvent } from '@/utils/testing';
+import { render, screen, fireEvent, act } from '@/utils/testing';
 
 import { TaskItem } from './taskItem';
 
@@ -82,6 +82,28 @@ describe('TaskItem', () => {
     fireEvent.click(screen.getByLabelText('Save'));
 
     expect(onEdit).toHaveBeenCalledWith('1', 'Updated Task');
+  });
+
+  it('saves edited title via TaskForm onSubmit', async () => {
+    render(
+      <TaskItem
+        task={mockTask}
+        onToggle={onToggle}
+        onDelete={onDelete}
+        onEdit={onEdit}
+      />,
+    );
+
+    fireEvent.click(screen.getByLabelText('Edit'));
+
+    const input = screen.getByRole('textbox');
+
+    fireEvent.change(input, { target: { value: 'Updated Title' } });
+
+    await act(async () => {
+      fireEvent.submit(input.closest('form')!);
+    });
+    expect(onEdit).toHaveBeenCalledWith('1', 'Updated Title');
   });
 
   it('cancels edit and restores original title', () => {
