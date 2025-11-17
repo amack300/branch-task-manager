@@ -4,7 +4,7 @@ import { TaskItem } from './taskItem';
 
 const mockTask = {
   id: '1',
-  title: 'Test Task',
+  title: 'Task A',
   completed: false,
 };
 
@@ -17,7 +17,6 @@ describe('TaskItem', () => {
     jest.clearAllMocks();
   });
 
-
   it('renders task title', () => {
     render(
       <TaskItem
@@ -28,7 +27,7 @@ describe('TaskItem', () => {
       />,
     );
 
-    expect(screen.getByText('Test Task')).toBeInTheDocument();
+    expect(screen.getByText('Task A')).toBeInTheDocument();
   });
 
   it('calls onToggle when checkbox is clicked', () => {
@@ -61,7 +60,7 @@ describe('TaskItem', () => {
     fireEvent.click(screen.getByLabelText('Edit'));
 
     // now an input should appear
-    expect(screen.getByDisplayValue('Test Task')).toBeInTheDocument();
+    expect(screen.getByDisplayValue('Task A')).toBeInTheDocument();
   });
 
   it('saves edited title', () => {
@@ -76,7 +75,7 @@ describe('TaskItem', () => {
 
     fireEvent.click(screen.getByLabelText('Edit'));
 
-    const input = screen.getByDisplayValue('Test Task');
+    const input = screen.getByDisplayValue('Task A');
 
     fireEvent.change(input, { target: { value: 'Updated Task' } });
 
@@ -97,14 +96,14 @@ describe('TaskItem', () => {
 
     fireEvent.click(screen.getByLabelText('Edit'));
 
-    const input = screen.getByDisplayValue('Test Task');
+    const input = screen.getByDisplayValue('Task A');
 
     fireEvent.change(input, { target: { value: 'Different' } });
 
     fireEvent.click(screen.getByLabelText('Cancel'));
 
     // Editing closed, label is back
-    expect(screen.getByText('Test Task')).toBeInTheDocument();
+    expect(screen.getByText('Task A')).toBeInTheDocument();
   });
 
   it('opens delete dialog when delete button is clicked', () => {

@@ -3,13 +3,12 @@ import { render, screen } from '@/utils/testing';
 import { TaskList } from './tasklist';
 
 import { ToDoStore } from '@/lib/store';
+import { useTodoStore } from '@/lib/store';
 
 // Mock Zustand store
 jest.mock('@/lib/store', () => ({
   useTodoStore: jest.fn(),
 }));
-
-import { useTodoStore } from '@/lib/store';
 
 describe('TaskList', () => {
   const mockEdit = jest.fn();

@@ -124,7 +124,7 @@ export const TaskItem = ({
               <DialogContent>
                 <DialogHeader>
                   <DialogTitle>Are you sure?</DialogTitle>
-                  <DialogDescription>
+                  <DialogDescription className="sr-only">
                     Dialog to confirm the deletion of a task.
                   </DialogDescription>
                 </DialogHeader>

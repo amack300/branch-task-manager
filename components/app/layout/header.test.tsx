@@ -2,6 +2,7 @@ import { render, screen, fireEvent } from '@/utils/testing';
 
 import { Header } from './header';
 
+import { useTodoStore } from '@/lib/store';
 import { ToDoStore } from '@/lib/store';
 
 // Mock Zustand store
@@ -9,9 +10,8 @@ jest.mock('@/lib/store', () => ({
   useTodoStore: jest.fn(),
 }));
 
-import { useTodoStore } from '@/lib/store';
-
 describe('Header', () => {
+
   const setupMockStore = (storeValues: Partial<ToDoStore>) => {
     (useTodoStore as unknown as jest.Mock).mockImplementation((selector) =>
       selector(storeValues),
