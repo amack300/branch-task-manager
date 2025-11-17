@@ -11,7 +11,7 @@ const customJestConfig = {
     '^@/utils/(.*)$': '<rootDir>/utils/$1',
     '^@/lib/(.*)$': '<rootDir>/lib/$1',
     '^@/constants/(.*)$': '<rootDir>/constants/$1',
-    '^@/components/app/(.*)$': '<rootDir>/components/app/$1', // Only test app specific components
+    '^@/components/(.*)$': '<rootDir>/components/$1',
     '^@/pages/(.*)$': '<rootDir>/pages/$1',
   },
   testEnvironment: 'jest-environment-jsdom',

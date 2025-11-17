@@ -14,7 +14,7 @@ export const TaskList = () => {
   );
 
   return (
-    <section className="grid gap-4">
+    <section className="grid gap-4 mt-4">
       {tasks.length === 0 ? (
         <p className="text-gray-500 text-center">No tasks yet. Add one!</p>
       ) : (

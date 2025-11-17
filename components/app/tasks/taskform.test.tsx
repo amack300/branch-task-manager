@@ -56,13 +56,15 @@ describe('TaskForm', () => {
     ).toBeInTheDocument();
   });
 
-  it('submits a valid task and resets the field', async () => {
-    render(<TaskForm />);
+  it('calls onSubmit prop instead of addTask and resets the field', async () => {
+    const onSubmitMock = jest.fn();
+
+    render(<TaskForm onSubmit={onSubmitMock} />);
 
     const input = screen.getByPlaceholderText('Add a new task...');
     const button = screen.getByRole('button', { name: 'Add Task' });
 
-    fireEvent.change(input, { target: { value: 'Task A' } });
+    fireEvent.change(input, { target: { value: 'Custom Task' } });
 
     await waitFor(() => {
       expect(button).toBeEnabled();
@@ -71,8 +73,10 @@ describe('TaskForm', () => {
     fireEvent.click(button);
 
     await waitFor(() => {
-      expect(addTaskMock).toHaveBeenCalledWith('Task A');
+      expect(onSubmitMock).toHaveBeenCalledWith('Custom Task');
     });
+
+    expect(addTaskMock).not.toHaveBeenCalled();
 
     expect(input).toHaveValue('');
   });

@@ -4,7 +4,6 @@ import { useState } from 'react';
 import { Checkbox } from '@/components/ui/checkbox';
 import { Button } from '@/components/ui/button';
 import { Label } from '@/components/ui/label';
-import { Input } from '@/components/ui/input';
 import { Edit2, Trash2, Save, X } from 'lucide-react';
 
 import {
@@ -16,6 +15,8 @@ import {
   DialogTrigger,
   DialogFooter,
 } from '@/components/ui/dialog';
+
+import { TaskForm } from '@/components/app/tasks/taskform';
 
 import type { Task } from '@/types';
 
@@ -54,12 +55,12 @@ export const TaskItem = ({
       data-testid="task-item"
       className="flex items-center justify-between p-4 bg-white shadow-sm rounded-lg border"
     >
-      <div className="flex items-center space-x-3">
+      <div className="flex items-center space-x-3 w-full">
         {isEditing ? (
-          <Input
-            value={editTitle}
-            onChange={(e) => setEditTitle(e.target.value)}
-            className="mr-3 w-100"
+          <TaskForm
+            disableSubmit
+            defaultValue={editTitle}
+            onChange={(value) => setEditTitle(value)}
           />
         ) : (
           <>
@@ -73,7 +74,7 @@ export const TaskItem = ({
             <Label
               htmlFor={`task-${task.id}`}
               className={cn(
-                'text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70',
+                'text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 w-full break-all',
                 task.completed &&
                   !completed &&
                   'line-through text-muted-foreground',
@@ -85,7 +86,7 @@ export const TaskItem = ({
           </>
         )}
       </div>
-      <div className="flex items-center space-x-2">
+      <div className="flex items-center space-x-3 ml-3">
         {isEditing ? (
           <>
             <Button

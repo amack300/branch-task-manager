@@ -16,31 +16,57 @@ import {
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 
-const formSchema = z.object({
-  title: z
-    .string()
-    .min(3, {
-      message: 'Task title must be at least 3 characters.',
-    })
-    .max(100, {
-      message: 'Task title must be no more than 100 characters.',
-    }),
-});
+interface TaskFormProps {
+  defaultValue?: string;
+  onChange?: (value: string) => void;
+  onSubmit?: (value: string) => void;
+  disableSubmit?: boolean;
+}
 
-export const TaskForm = () => {
+export const TaskForm = ({
+  defaultValue = '',
+  onChange,
+  onSubmit,
+  disableSubmit,
+}: TaskFormProps) => {
   const addTask = useTodoStore((state) => state.addTask);
+
+  const formSchema = z.object({
+    title: z
+      .string()
+      .min(3, {
+        message: 'Task title must be at least 3 characters.',
+      })
+      .max(100, {
+        message: 'Task title must be no more than 100 characters.',
+      }),
+  });
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      title: '',
+      title: defaultValue,
     },
     mode: 'onChange',
   });
 
-  const onSubmit = (values: z.infer<typeof formSchema>) => {
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement>,
+    fieldOnChange: (...event: unknown[]) => void,
+  ) => {
+    if (onChange) {
+      onChange(e.target.value);
+    }
+    fieldOnChange(e);
+  };
+
+  const handleSubmit = (values: z.infer<typeof formSchema>) => {
     if (!values.title.trim()) return;
-    addTask(values.title);
+    if (onSubmit) {
+      onSubmit(values.title);
+    } else {
+      addTask(values.title);
+    }
     form.resetField('title');
   };
 
@@ -48,8 +74,8 @@ export const TaskForm = () => {
     <Form {...form}>
       <form
         role="form"
-        className="flex mb-6 space-x-2"
-        onSubmit={form.handleSubmit(onSubmit)}
+        className="flex space-x-3 w-full"
+        onSubmit={form.handleSubmit(handleSubmit)}
       >
         <FormField
           control={form.control}
@@ -59,17 +85,22 @@ export const TaskForm = () => {
               <FormControl>
                 <Input
                   className="w-full"
-                  placeholder="Add a new task..."
+                  placeholder={
+                    !defaultValue.length ? 'Add a new task...' : undefined
+                  }
                   {...field}
+                  onChange={(e) => handleChange(e, field.onChange)}
                 />
               </FormControl>
               <FormMessage />
             </FormItem>
           )}
         />
-        <Button disabled={!form.formState.isValid} type="submit">
-          Add Task
-        </Button>
+        {!disableSubmit && (
+          <Button disabled={!form.formState.isValid} type="submit">
+            Add Task
+          </Button>
+        )}
       </form>
     </Form>
   );
