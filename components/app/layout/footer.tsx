@@ -9,7 +9,7 @@ export const Footer = () => {
       data-testid="footer-element"
       className="flex flex-col container mt-auto p-4"
     >
-      <p className="flex text-sm text-gray-600 border-t-1 border-gray-300 py-4">
+      <p className="flex text-sm text-gray-600 border-t-1 border-gray-300 pt-4">
         <span className="flex items-center mx-auto">
           Built with love by
           <Button asChild variant="link" className="p-0 mx-1">
