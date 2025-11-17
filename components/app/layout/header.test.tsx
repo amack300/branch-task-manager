@@ -11,7 +11,6 @@ jest.mock('@/lib/store', () => ({
 }));
 
 describe('Header', () => {
-
   const setupMockStore = (storeValues: Partial<ToDoStore>) => {
     (useTodoStore as unknown as jest.Mock).mockImplementation((selector) =>
       selector(storeValues),
