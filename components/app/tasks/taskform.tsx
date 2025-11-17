@@ -66,8 +66,8 @@ export const TaskForm = ({
       onSubmit(values.title);
     } else {
       addTask(values.title);
+      form.resetField('title');
     }
-    form.resetField('title');
   };
 
   return (

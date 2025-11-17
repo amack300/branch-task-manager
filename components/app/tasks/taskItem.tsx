@@ -60,6 +60,10 @@ export const TaskItem = ({
           <TaskForm
             disableSubmit
             defaultValue={editTitle}
+            onSubmit={(value) => {
+              setEditTitle(value);
+              handleSave();
+            }}
             onChange={(value) => setEditTitle(value)}
           />
         ) : (
