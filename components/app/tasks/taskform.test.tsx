@@ -24,7 +24,7 @@ describe('TaskForm', () => {
     jest.clearAllMocks();
   });
 
-  it('renders and button starts disabled', () => {
+  it('renders and submit button is disabled by default', () => {
     render(<TaskForm />);
 
     expect(
@@ -54,6 +54,27 @@ describe('TaskForm', () => {
     expect(
       await screen.findByText(/at least 3 characters/i),
     ).toBeInTheDocument();
+  });
+
+  it('submits a valid task and resets the field', async () => {
+    render(<TaskForm />);
+
+    const input = screen.getByPlaceholderText('Add a new task...');
+    const button = screen.getByRole('button', { name: 'Add Task' });
+
+    fireEvent.change(input, { target: { value: 'Task A' } });
+
+    await waitFor(() => {
+      expect(button).toBeEnabled();
+    });
+
+    fireEvent.click(button);
+
+    await waitFor(() => {
+      expect(addTaskMock).toHaveBeenCalledWith('Task A');
+    });
+
+    expect(input).toHaveValue('');
   });
 
   it('calls onSubmit prop instead of addTask', async () => {
