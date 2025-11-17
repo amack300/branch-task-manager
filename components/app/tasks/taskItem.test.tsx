@@ -1,4 +1,4 @@
-import { render, screen, fireEvent, act } from '@/utils/testing';
+import { render, screen, fireEvent, waitFor } from '@/utils/testing';
 
 import { TaskItem } from './taskItem';
 
@@ -99,11 +99,11 @@ describe('TaskItem', () => {
     const input = screen.getByRole('textbox');
 
     fireEvent.change(input, { target: { value: 'Updated Title' } });
+    fireEvent.submit(input.closest('form')!);
 
-    await act(async () => {
-      fireEvent.submit(input.closest('form')!);
+    await waitFor(() => {
+      expect(onEdit).toHaveBeenCalledWith('1', 'Updated Title');
     });
-    expect(onEdit).toHaveBeenCalledWith('1', 'Updated Title');
   });
 
   it('cancels edit and restores original title', () => {
