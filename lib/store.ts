@@ -9,9 +9,9 @@ export interface ToDoStore {
   completed: boolean;
   toggleShowCompleted: () => void;
   addTask: (title: Task['title']) => void;
-  editTask: (id: string, newTitle: string) => void;
-  deleteTask: (id: string) => void;
-  toggleTaskCompletion: (id: string) => void;
+  editTask: (id: Task['id'], newTitle: string) => void;
+  deleteTask: (id: Task['id']) => void;
+  toggleTaskCompletion: (id: Task['id']) => void;
   clearTasks: () => void;
 }
 

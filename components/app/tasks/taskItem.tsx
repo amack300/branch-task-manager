@@ -25,7 +25,7 @@ import { cn } from '@/lib/utils';
 interface TaskItemProps {
   task: Task;
   completed?: boolean;
-  onToggle: (id: string, completed: boolean) => void;
+  onToggle: (id: string | number, completed: boolean) => void;
   onDelete: (id: string) => void;
   onEdit: (id: string, newTitle: string) => void;
 }
