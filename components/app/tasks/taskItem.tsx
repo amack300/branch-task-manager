@@ -57,10 +57,12 @@ export const TaskItem = ({
     >
       <div className="flex items-center space-x-3 w-full">
         {isEditing ? (
+          // Reused TaskForm for edit mode to preserve task validation
           <TaskForm
             disableSubmit
             defaultValue={editTitle}
             onSubmit={(value) => {
+              // Allow title to be saved on enter / form submission
               setEditTitle(value);
               handleSave();
             }}

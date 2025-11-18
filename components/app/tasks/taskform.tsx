@@ -65,6 +65,7 @@ export const TaskForm = ({
     if (onSubmit) {
       onSubmit(values.title);
     } else {
+      // Default to task creation if not used in edit mode
       addTask(values.title);
       form.resetField('title');
     }
@@ -86,6 +87,7 @@ export const TaskForm = ({
                 <Input
                   className="w-full"
                   placeholder={
+                    // Only show placeholder if use for task creation
                     !defaultValue.length ? 'Add a new task...' : undefined
                   }
                   {...field}
@@ -97,6 +99,7 @@ export const TaskForm = ({
           )}
         />
         {!disableSubmit && (
+          // Allow the ability to disable the submit button for use in edit mode
           <Button disabled={!form.formState.isValid} type="submit">
             Add Task
           </Button>

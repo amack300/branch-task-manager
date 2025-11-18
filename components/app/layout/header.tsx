@@ -27,6 +27,7 @@ export const Header = () => {
       <h1 className="text-3xl text-primary mb-6">Branch Task Manager</h1>
       <div className="flex items-start gap-2">
         {tasks.find((task) => task.completed) && (
+          // Only show if at least 1 task is marked as completed
           <Button
             variant="link"
             className="p-0 ml-3"
@@ -36,6 +37,7 @@ export const Header = () => {
           </Button>
         )}
         {tasks.length !== 0 && (
+          // Only show if at least 1 task has been created
           <Button
             variant="link"
             className="p-0 ml-3"
